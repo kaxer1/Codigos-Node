@@ -51,7 +51,7 @@ const login = async(req, res = response) => {
             })
         }
 
-        const validPassword = bycrpt.compareSync( password, usuarioDB.password );
+        const validPassword = bcript.compareSync( password, usuarioDB.password );
         if (!validPassword) {
             return res.status(400).json({
                 ok:false,
@@ -59,7 +59,7 @@ const login = async(req, res = response) => {
             })
         }
 
-        const token = await generarJWT(usuario.id);
+        const token = await generarJWT(usuarioDB.id);
         res.json({
             ok: true,
             usuario: usuarioDB,
@@ -67,6 +67,7 @@ const login = async(req, res = response) => {
         });
 
     } catch (error) {
+        console.log(error);
         return res.status(500).json({
             ok: false,
             msg: 'Hable con el administrador'
