@@ -86,13 +86,14 @@ const renewToken = async( req, res = response) => {
                 msg: 'Usuario no Valido'
             })
         }
-        const token = await generarJWT(usuario.id);
+        const token = await generarJWT(usuarioDB.id);
         res.json({
             ok: true,
             usuario: usuarioDB,
             token
         });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({
             ok: false,
             msg: 'Hable con el administrador'
